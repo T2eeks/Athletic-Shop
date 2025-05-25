@@ -1,28 +1,29 @@
-// $(document).ready(function() {
-//     // Swiper initialization (закомментировано для теста параллакса)
-//     // var mySwiper = new Swiper('.product-carousel', {
-//     //     loop: true,
-//     //     autoplay: {
-//     //         delay: 5000,
-//     //         disableOnInteraction: false,
-//     //     },
-//     //     navigation: {
-//     //         nextEl: '.swiper-button-next',
-//     //         prevEl: '.swiper-button-prev',
-//     //     },
-//     //     pagination: {
-//     //         el: '.swiper-pagination',
-//     //         clickable: true
-//     //     },
-//     //     effect: 'fade',
-//     //     fadeEffect: {
-//     //         crossFade: true
-//     //     },
-//     //     watchOverflow: true,
-//     //     watchSlidesVisibility: true,
-//     //     touchRatio: 0,
-//     //     simulateTouch: false
-//     // });
+$(document).ready(function() {
+    // Swiper initialization
+    var mySwiper = new Swiper('.product-carousel', {
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        },
+        watchOverflow: true,
+        watchSlidesVisibility: true,
+        // Отключаем перехват событий мыши Swiper'ом, чтобы не мешать Parallax
+        touchRatio: 0,
+        simulateTouch: false
+    });
 
     // Parallax initialization (disabled on mobile)
     if (!/Mobi/.test(navigator.userAgent)) {
@@ -39,16 +40,7 @@
             // Отладка: проверяем события мыши
             $(this).on('mousemove', function(e) {
                 console.log('Mouse moved over parallax scene:', e.pageX, e.pageY);
-                const transform = $(this).css('transform');
-                console.log('Current transform:', transform);
             });
-
-            // Проверяем, инициализировался ли объект
-            if (parallax) {
-                console.log('Parallax instance created:', parallax);
-            } else {
-                console.error('Parallax failed to initialize for:', this);
-            }
         });
     } else {
         console.log('Parallax disabled on mobile');
@@ -114,4 +106,4 @@
                 });
         });
     });
-// });
+});

@@ -131,7 +131,13 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 500px;
-    opacity: 1; /* Устанавливаем начальную видимость */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.swiper-slide-active,
+.visible {
+    opacity: 1 !important;
 }
 
 .carousel-item {
@@ -139,7 +145,6 @@ body {
     text-align: center;
     width: 100%;
     min-height: 500px;
-    opacity: 1;
 }
 
 .js-parallax-scene {
@@ -148,7 +153,6 @@ body {
     position: relative;
     height: 100%;
     pointer-events: auto;
-    min-height: 500px; /* Явная высота для параллакса */
 }
 
 .product-main {
@@ -164,7 +168,7 @@ body {
     transform-style: preserve-3d;
     backface-visibility: hidden;
     transition: transform 0.3s ease;
-    display: block;
+    display: block; /* Убеждаемся, что изображение отображается */
 }
 
 .product-shadow {
@@ -240,7 +244,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    display: none; /* Отключаем кнопки при тесте без Swiper */
+    display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -274,7 +278,6 @@ body {
     left: 0;
     width: 100%;
     text-align: center;
-    display: none; /* Отключаем пагинацию при тесте без Swiper */
 }
 
 .swiper-pagination-bullet {
@@ -372,6 +375,10 @@ body {
 
     .product-shadow {
         left: -150px;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        display: none;
     }
 }
 
