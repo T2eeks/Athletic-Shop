@@ -1,4 +1,6 @@
-
+/* ====================== */
+/* === БАЗОВЫЕ СТИЛИ === */
+/* ====================== */
 * {
     margin: 0;
     padding: 0;
@@ -9,20 +11,31 @@ body {
     font-family: 'Muli', sans-serif;
     background-color: #000000;
     color: #FFFFFF;
+    overflow-x: hidden;
 }
 
+/* ====================== */
+/* === АНИМАЦИИ === */
+/* ====================== */
+@keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-100%); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInSection {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* ====================== */
+/* === ШАПКА САЙТА === */
+/* ====================== */
 .header-section {
     padding: 15px 0;
     background-color: #490303;
     position: relative;
     opacity: 0;
-    transform: translateY(-100%);
     animation: slideDown 1s ease forwards;
-}
-
-@keyframes slideDown {
-    0% { opacity: 0; transform: translateY(-100%); }
-    100% { opacity: 1; transform: translateY(0); }
 }
 
 .logo img {
@@ -45,6 +58,7 @@ body {
     color: #FFFFFF;
     text-decoration: none;
     font-size: 18px;
+    transition: color 0.3s ease;
 }
 
 .nav-menu ul li a:hover {
@@ -60,34 +74,16 @@ body {
 .to-cart a, .to-account a {
     color: #FFFFFF;
     font-size: 24px;
+    transition: color 0.3s ease;
 }
 
 .to-cart a:hover, .to-account a:hover {
     color: #CCCCCC;
 }
 
-.swiper-container {
-    overflow: visible;
-}
-
-.swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.swiper-button-next, .swiper-button-prev {
-    color: #fff;
-    background: rgba(0,0,0,0.5);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-.swiper-button-next:after, .swiper-button-prev:after {
-    font-size: 20px;
-}
-
+/* ====================== */
+/* === ГЛАВНЫЙ БАННЕР === */
+/* ====================== */
 .hero-section {
     padding: 400px 0 100px;
     color: #FFFFFF;
@@ -96,12 +92,6 @@ body {
     overflow: hidden;
     opacity: 0;
     animation: fadeInSection 1s ease 1s forwards;
-}
-
-
-@keyframes fadeInSection {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
 }
 
 .background-text {
@@ -122,6 +112,9 @@ body {
     text-align: center;
 }
 
+/* ====================== */
+/* === КАРУСЕЛЬ ТОВАРОВ === */
+/* ====================== */
 .product-carousel {
     position: relative;
     max-width: 1200px;
@@ -129,9 +122,33 @@ body {
     text-align: center;
 }
 
+.swiper-container {
+    overflow: hidden;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    opacity: 1; /* Устанавливаем начальную видимость */
+}
+
 .carousel-item {
     position: relative;
     text-align: center;
+    width: 100%;
+    min-height: 500px;
+    opacity: 1;
+}
+
+.js-parallax-scene {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    position: relative;
+    height: 100%;
+    pointer-events: auto;
+    min-height: 500px; /* Явная высота для параллакса */
 }
 
 .product-main {
@@ -139,27 +156,15 @@ body {
     z-index: 1;
 }
 
-owl-stage {
-    display: flex;
-    align-items: center;
-}
-
-.owl-item {
-    display: flex;
-    justify-content: center;
-}
-
-.product-carousel .item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .product-main img {
-     max-width: 100%;
+    max-width: 100%;
+    width: 400px;
     height: auto;
     border-radius: 10px;
-    transition: transform 0.5s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform 0.3s ease;
+    display: block;
 }
 
 .product-shadow {
@@ -176,7 +181,10 @@ owl-stage {
     width: 400px;
     height: auto;
     border-radius: 10px;
-    transition: transform 0.5s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform 0.3s ease;
+    display: block;
 }
 
 .product-info {
@@ -185,10 +193,14 @@ owl-stage {
     justify-content: center;
     align-items: center;
     gap: 20px;
+    position: relative;
+    z-index: 2;
 }
 
 .product-details {
-    transition: transform 0.5s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform 0.3s ease;
 }
 
 .product-info h2 {
@@ -209,34 +221,84 @@ owl-stage {
     text-decoration: none;
     display: inline-block;
     transition: background 0.3s ease;
+    border-radius: 4px;
 }
 
 .buy-now-btn:hover {
     background: #3A0202;
 }
 
-.owl-prev, .owl-next {
-    color: #333333 !important;
-    font-size: 2rem !important;
-    position: absolute !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
+/* Swiper Navigation Buttons */
+.swiper-button-next, .swiper-button-prev {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #c2ebff;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.3s ease;
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none; /* Отключаем кнопки при тесте без Swiper */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
-.owl-prev { left: -60px; }
-.owl-next { right: -60px; }
-
-.owl-prev:hover, .owl-next:hover {
-    color: #666666 !important;
+.swiper-button-prev {
+    left: 10px;
 }
 
+.swiper-button-next {
+    right: 10px;
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+    display: none;
+}
+
+.swiper-button-next svg, .swiper-button-prev svg {
+    stroke: #c2ebff;
+    transition: stroke 0.3s ease;
+}
+
+.swiper-button-next:hover svg, .swiper-button-prev:hover svg {
+    stroke: #007dbb;
+}
+
+/* Swiper Pagination */
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    display: none; /* Отключаем пагинацию при тесте без Swiper */
+}
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: #aceaff;
+    border-radius: 50%;
+    margin: 0 4px;
+    opacity: 1;
+    transition: background-color 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+    background: #185288;
+}
+
+/* ====================== */
+/* === МОДАЛЬНОЕ ОКНО === */
+/* ====================== */
 .modal-content {
     background-color: #000000;
     color: #FFFFFF;
     border: 1px solid #490303;
+    border-radius: 5px;
 }
 
 .modal-header, .modal-body {
@@ -247,27 +309,42 @@ owl-stage {
     color: #FFFFFF;
     font-size: 24px;
     opacity: 1;
+    transition: color 0.3s ease;
 }
 
 .close:hover {
     color: #490303;
 }
 
+.form-group {
+    margin-bottom: 1rem;
+}
+
 .form-control {
     background-color: #333333;
     color: #FFFFFF;
     border: 1px solid #490303;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #FFFFFF;
+    box-shadow: none;
 }
 
 .btn-danger {
     background-color: #490303;
     border: none;
+    transition: background 0.3s ease;
 }
 
 .btn-danger:hover {
     background-color: #3A0202;
 }
 
+/* ====================== */
+/* === ПОДВАЛ САЙТА === */
+/* ====================== */
 .footer-section {
     padding: 50px 0;
     background-color: #000000;
@@ -276,11 +353,14 @@ owl-stage {
     animation: fadeInSection 1s ease 2s forwards;
 }
 
-.footer-section p {
+.copyright-text p {
     color: #FFFFFF;
     font-size: 14px;
 }
 
+/* ====================== */
+/* === АДАПТИВНОСТЬ === */
+/* ====================== */
 @media (max-width: 991px) {
     .background-text {
         font-size: 8rem;
@@ -293,27 +373,7 @@ owl-stage {
     .product-shadow {
         left: -150px;
     }
-
-    .owl-prev { left: -30px; }
-    .owl-next { right: -30px; }
 }
-
-.background-text {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    transform: translateY(-50%) skewX(-10deg);
-    font-family: 'Oswald', sans-serif;
-    font-size: 15rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #FFFFFF;
-    opacity: 0.05;
-    z-index: -3;
-    pointer-events: none;
-}
-
 
 @media (max-width: 576px) {
     .background-text {
@@ -331,6 +391,7 @@ owl-stage {
     .product-info {
         flex-direction: column;
         align-items: center;
+        gap: 10px;
     }
 
     .product-info h2 {
