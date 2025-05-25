@@ -1,5 +1,4 @@
 $(document).ready(function() {
-        // Инициализация Swiper
         var mySwiper = new Swiper('.product-carousel', {
             loop: true,
             autoplay: {
@@ -24,7 +23,6 @@ $(document).ready(function() {
             }
         });
 
-        // Параллакс эффект при движении мыши
         $(document).mousemove(function(e) {
             const screenWidth = $(window).width();
             const screenHeight = $(window).height();

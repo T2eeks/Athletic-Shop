@@ -1,4 +1,4 @@
-/* Basic Reset */
+
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +11,6 @@ body {
     color: #FFFFFF;
 }
 
-/* Header Section */
 .header-section {
     padding: 15px 0;
     background-color: #490303;
@@ -88,7 +87,7 @@ body {
 .swiper-button-next:after, .swiper-button-prev:after {
     font-size: 20px;
 }
-/* Hero Section */
+
 .hero-section {
     padding: 400px 0 100px;
     color: #FFFFFF;
@@ -216,7 +215,6 @@ owl-stage {
     background: #3A0202;
 }
 
-/* Owl Carousel Styles */
 .owl-prev, .owl-next {
     color: #333333 !important;
     font-size: 2rem !important;
@@ -235,7 +233,6 @@ owl-stage {
     color: #666666 !important;
 }
 
-/* Bootstrap Modal Overrides */
 .modal-content {
     background-color: #000000;
     color: #FFFFFF;
@@ -271,7 +268,6 @@ owl-stage {
     background-color: #3A0202;
 }
 
-/* Footer Section */
 .footer-section {
     padding: 50px 0;
     background-color: #000000;
@@ -285,7 +281,6 @@ owl-stage {
     font-size: 14px;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 991px) {
     .background-text {
         font-size: 8rem;
