@@ -1,0 +1,353 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+/* Header Section */
+.header-section {
+    padding: 15px 0;
+    background-color: #490303;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-100%);
+    animation: slideDown 1s ease forwards;
+}
+
+@keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-100%); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.logo img {
+    max-height: 50px;
+    border-radius: 50%;
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.nav-menu ul li {
+    margin: 0 15px;
+}
+
+.nav-menu ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-menu ul li a:hover {
+    color: #CCCCCC;
+}
+
+.top-option {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.to-cart a, .to-account a {
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
+.to-cart a:hover, .to-account a:hover {
+    color: #CCCCCC;
+}
+
+.swiper-container {
+    overflow: visible;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 20px;
+}
+/* Hero Section */
+.hero-section {
+    padding: 400px 0 100px;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInSection 1s ease 1s forwards;
+}
+
+
+@keyframes fadeInSection {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.background-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%) skewX(-10deg);
+    font-family: 'Oswald', sans-serif;
+    font-size: 15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    opacity: 0.05;
+    z-index: -3;
+    pointer-events: none;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.product-carousel {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.carousel-item {
+    position: relative;
+    text-align: center;
+}
+
+.product-main {
+    position: relative;
+    z-index: 1;
+}
+
+owl-stage {
+    display: flex;
+    align-items: center;
+}
+
+.owl-item {
+    display: flex;
+    justify-content: center;
+}
+
+.product-carousel .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-main img {
+     max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+}
+
+.product-shadow {
+    position: absolute;
+    top: 20%;
+    left: -200px;
+    transform: translateY(-50%) scale(0.7);
+    opacity: 0.3;
+    filter: blur(10px);
+    z-index: -2;
+}
+
+.product-shadow img {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+}
+
+.product-info {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.product-details {
+    transition: transform 0.5s ease;
+}
+
+.product-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
+.buy-now-btn {
+    background: #490303;
+    color: #FFFFFF;
+    padding: 10px 30px;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+.buy-now-btn:hover {
+    background: #3A0202;
+}
+
+/* Owl Carousel Styles */
+.owl-prev, .owl-next {
+    color: #333333 !important;
+    font-size: 2rem !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.owl-prev { left: -60px; }
+.owl-next { right: -60px; }
+
+.owl-prev:hover, .owl-next:hover {
+    color: #666666 !important;
+}
+
+/* Bootstrap Modal Overrides */
+.modal-content {
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 1px solid #490303;
+}
+
+.modal-header, .modal-body {
+    border: none;
+}
+
+.close {
+    color: #FFFFFF;
+    font-size: 24px;
+    opacity: 1;
+}
+
+.close:hover {
+    color: #490303;
+}
+
+.form-control {
+    background-color: #333333;
+    color: #FFFFFF;
+    border: 1px solid #490303;
+}
+
+.btn-danger {
+    background-color: #490303;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #3A0202;
+}
+
+/* Footer Section */
+.footer-section {
+    padding: 50px 0;
+    background-color: #000000;
+    text-align: center;
+    opacity: 0;
+    animation: fadeInSection 1s ease 2s forwards;
+}
+
+.footer-section p {
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .background-text {
+        font-size: 8rem;
+    }
+
+    .product-main img, .product-shadow img {
+        width: 300px;
+    }
+
+    .product-shadow {
+        left: -150px;
+    }
+
+    .owl-prev { left: -30px; }
+    .owl-next { right: -30px; }
+}
+
+.background-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%) skewX(-10deg);
+    font-family: 'Oswald', sans-serif;
+    font-size: 15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    opacity: 0.05;
+    z-index: -3;
+    pointer-events: none;
+}
+
+
+@media (max-width: 576px) {
+    .background-text {
+        font-size: 5rem;
+    }
+
+    .product-main img, .product-shadow img {
+        width: 200px;
+    }
+
+    .product-shadow {
+        left: -100px;
+    }
+
+    .product-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-info h2 {
+        font-size: 1.2rem;
+    }
+
+    .product-info p {
+        font-size: 1rem;
+    }
+
+    .buy-now-btn {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+}
