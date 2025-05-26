@@ -63,62 +63,57 @@
     <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="background-text">ATHLETIC</div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="swiper product-carousel">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="parallax-slide" id="slide1">
-                                    <div class="parallax-image image-blur" style="background-image: url('img/products/creatine.png');"></div>
-                                    <div class="parallax-image image-main" style="background-image: url('img/products/creatine.png');"></div>
-                                    <div class="product-info">
-                                        <div class="product-details">
-                                            <h2>Creatin Gold Creatine</h2>
-                                            <p>1000 г | 27 900 тенге</p>
-                                        </div>
-                                        <a href="#" class="buy-now-btn">Купить сейчас</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="swiper-slide">
-                                <div class="parallax-slide" id="slide2">
-                                    <div class="parallax-image image-blur" style="background-image: url('img/products/anabolic.png');"></div>
-                                    <div class="parallax-image image-main" style="background-image: url('img/products/anabolic.png');"></div>
-                                    <div class="product-info">
-                                        <div class="product-details">
-                                            <h2>Anabolic</h2>
-                                            <p>1000 г | 30 000 тенге</p>
-                                        </div>
-                                        <a href="#" class="buy-now-btn">Купить сейчас</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="swiper-slide">
-                                <div class="parallax-slide" id="slide3">
-                                    <div class="parallax-image image-blur" style="background-image: url('img/products/mutant.png');"></div>
-                                    <div class="parallax-image image-main" style="background-image: url('img/products/mutant.png');"></div>
-                                    <div class="product-info">
-                                        <div class="product-details">
-                                            <h2>Mutant</h2>
-                                            <p>1000 г | 28 500 тенге</p>
-                                        </div>
-                                        <a href="#" class="buy-now-btn">Купить сейчас</a>
-                                    </div>
-                                </div>
-                            </div>
+        <!-- Убираем container, чтобы карусель растянулась на всю ширину -->
+        <div class="swiper product-carousel">
+            <div class="swiper-wrapper">
+                <!-- Slide 1: Creatine -->
+                <div class="swiper-slide">
+                    <div class="parallax-slide" id="slide1">
+                        <div class="product-label">КРЕАТИН</div>
+                        <div class="parallax-image image-blur" style="background-image: url('img/products/creatine.png');"></div>
+                        <div class="parallax-image image-main" style="background-image: url('img/products/creatine.png');"></div>
+                        <div class="product-info-block">
+                            <div class="product-title">Kevin Levrone Gold Creatine 1000г</div>
+                            <div class="product-price">27.900 ₸</div>
+                            <a href="#" class="buy-now-btn">Купить сейчас</a>
                         </div>
-                        
-                        <!-- Navigation Buttons -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <!-- Pagination -->
-                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2: Anabolic -->
+                <div class="swiper-slide">
+                    <div class="parallax-slide" id="slide2">
+                        <div class="product-label">АНАБОЛИК</div>
+                        <div class="parallax-image image-blur" style="background-image: url('img/products/anabolic.png');"></div>
+                        <div class="parallax-image image-main" style="background-image: url('img/products/anabolic.png');"></div>
+                        <div class="product-info-block">
+                            <div class="product-title">Kevin Levrone Anabolic Amino 300 таблеток</div>
+                            <div class="product-price">13.900 ₸</div>
+                            <a href="#" class="buy-now-btn">Купить сейчас</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3: Gainer -->
+                <div class="swiper-slide">
+                    <div class="parallax-slide" id="slide3">
+                        <div class="product-label">ГЕЙНЕР</div>
+                        <div class="parallax-image image-blur" style="background-image: url('img/products/mutant.png');"></div>
+                        <div class="parallax-image image-main" style="background-image: url('img/products/mutant.png');"></div>
+                        <div class="product-info-block">
+                            <div class="product-title">Mutant Mass 2270 г</div>
+                            <div class="product-price">22.900 ₸</div>
+                            <a href="#" class="buy-now-btn">Купить сейчас</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            
+            <!-- Navigation Buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <!-- Убираем пагинацию -->
         </div>
     </section>
     <!-- Hero Section End -->

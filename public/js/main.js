@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Swiper initialization
+    // Swiper initialization with touch support
     const swiper = new Swiper('.product-carousel', {
         loop: true,
         autoplay: {
@@ -10,42 +10,51 @@ $(document).ready(function() {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-        },
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        }
+        effect: 'slide',
+        speed: 800,
+        slidesPerView: 1,
+        spaceBetween: 0,
+        simulateTouch: true,
+        touchRatio: 1,
+        grabCursor: true
     });
 
-    // Parallax effect
-    function applyParallaxToSlide(slide) {
-        const main = slide.querySelector('.image-main');
-        const blur = slide.querySelector('.image-blur');
+    // Parallax effect на весь экран (движение от курсора)
+    function applyGlobalParallax() {
+        window.addEventListener('mousemove', (e) => {
+            const x = -(e.clientX / window.innerWidth - 0.5); // Инвертируем X
+            const y = -(e.clientY / window.innerHeight - 0.5); // Инвертируем Y
 
-        slide.addEventListener('mousemove', e => {
-            const x = e.clientX / window.innerWidth - 0.5;
-            const y = e.clientY / window.innerHeight - 0.5;
+            const activeSlide = document.querySelector('.swiper-slide-active');
+            if (!activeSlide) return;
 
-            main.style.transform = `translate(-50%, -50%) rotate(-5deg) translate(${x * 30}px, ${y * 30}px)`;
-            blur.style.transform = `rotate(5deg) translate(${x * 15}px, ${y * 15}px)`;
+            const main = activeSlide.querySelector('.image-main');
+            const blur = activeSlide.querySelector('.image-blur');
+
+            if (main && blur) {
+                main.style.transform = `translate(-50%, -50%) rotate(-5deg) translate(${x * 60}px, ${y * 60}px)`;
+                blur.style.transform = `rotate(5deg) translate(${x * 30}px, ${y * 30}px)`;
+            }
         });
 
-        slide.addEventListener('mouseleave', () => {
-            main.style.transform = 'translate(-50%, -50%) rotate(-5deg)';
-            blur.style.transform = 'rotate(5deg)';
+        window.addEventListener('mouseleave', () => {
+            const slides = document.querySelectorAll('.swiper-slide');
+            slides.forEach(slide => {
+                const main = slide.querySelector('.image-main');
+                const blur = slide.querySelector('.image-blur');
+                if (main) main.style.transform = 'translate(-50%, -50%) rotate(-5deg)';
+                if (blur) blur.style.transform = 'rotate(5deg)';
+            });
         });
     }
 
-    document.querySelectorAll('.parallax-slide').forEach(applyParallaxToSlide);
+    applyGlobalParallax();
 
     // Buy now button logic
     $('.buy-now-btn').on('click', function(e) {
         e.preventDefault();
-        const productName = $(this).closest('.product-info').find('h2').text();
-        const productPrice = $(this).closest('.product-info').find('p').text();
+        const productName = $(this).closest('.product-info-block').find('.product-title').text();
+        const productPrice = $(this).closest('.product-info-block').find('.product-price').text();
 
         const modal = $(`
             <div class="modal" id="orderModal" tabindex="-1" role="dialog">
