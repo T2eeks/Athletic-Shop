@@ -120,75 +120,56 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
+    height: 100vh;
 }
 
-.swiper-container {
-    overflow: hidden;
+.swiper {
+    width: 100%;
+    height: 100%;
 }
 
 .swiper-slide {
     display: flex;
-    justify-content: center;
     align-items: center;
-    min-height: 500px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.swiper-slide-active,
-.visible {
-    opacity: 1 !important;
-}
-
-.carousel-item {
+    justify-content: center;
     position: relative;
-    text-align: center;
+    overflow: hidden;
+}
+
+.parallax-slide {
     width: 100%;
-    min-height: 500px;
-}
-
-.js-parallax-scene {
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    position: relative;
     height: 100%;
-    pointer-events: auto;
-}
-
-.product-main {
     position: relative;
-    z-index: 1;
+    overflow: hidden;
 }
 
-.product-main img {
-    max-width: 100%;
-    width: 400px;
-    height: auto;
-    border-radius: 10px;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    transition: transform 0.3s ease;
-    display: block; /* Убеждаемся, что изображение отображается */
-}
-
-.product-shadow {
+.parallax-image {
     position: absolute;
-    top: 20%;
-    left: -200px;
-    transform: translateY(-50%) scale(0.7);
-    opacity: 0.3;
-    filter: blur(10px);
-    z-index: -2;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    will-change: transform;
+    transition: transform 0.1s linear;
 }
 
-.product-shadow img {
+.image-main {
     width: 400px;
-    height: auto;
-    border-radius: 10px;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    transition: transform 0.3s ease;
-    display: block;
+    height: 400px;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+}
+
+.image-blur {
+    width: 300px;
+    height: 300px;
+    z-index: 1;
+    top: 40%;
+    left: 20%;
+    filter: blur(15px);
+    opacity: 0.3;
+    transform: rotate(5deg);
 }
 
 .product-info {
@@ -198,13 +179,12 @@ body {
     align-items: center;
     gap: 20px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
+    color: #fff;
 }
 
 .product-details {
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    transition: transform 0.3s ease;
+    text-align: center;
 }
 
 .product-info h2 {
@@ -232,43 +212,8 @@ body {
     background: #3A0202;
 }
 
-/* Swiper Navigation Buttons */
 .swiper-button-next, .swiper-button-prev {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #c2ebff;
-    border-radius: 50%;
-    background: transparent;
-    transition: all 0.3s ease;
-    z-index: 10;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.swiper-button-prev {
-    left: 10px;
-}
-
-.swiper-button-next {
-    right: 10px;
-}
-
-.swiper-button-next::after, .swiper-button-prev::after {
-    display: none;
-}
-
-.swiper-button-next svg, .swiper-button-prev svg {
-    stroke: #c2ebff;
-    transition: stroke 0.3s ease;
-}
-
-.swiper-button-next:hover svg, .swiper-button-prev:hover svg {
-    stroke: #007dbb;
+    color: white;
 }
 
 /* Swiper Pagination */
@@ -369,16 +314,14 @@ body {
         font-size: 8rem;
     }
 
-    .product-main img, .product-shadow img {
+    .image-main {
         width: 300px;
+        height: 300px;
     }
 
-    .product-shadow {
-        left: -150px;
-    }
-
-    .swiper-button-next, .swiper-button-prev {
-        display: none;
+    .image-blur {
+        width: 200px;
+        height: 200px;
     }
 }
 
@@ -387,12 +330,14 @@ body {
         font-size: 5rem;
     }
 
-    .product-main img, .product-shadow img {
+    .image-main {
         width: 200px;
+        height: 200px;
     }
 
-    .product-shadow {
-        left: -100px;
+    .image-blur {
+        width: 150px;
+        height: 150px;
     }
 
     .product-info {

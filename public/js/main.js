@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Swiper initialization
-    var mySwiper = new Swiper('.product-carousel', {
+    const swiper = new Swiper('.product-carousel', {
         loop: true,
         autoplay: {
             delay: 5000,
@@ -17,34 +17,29 @@ $(document).ready(function() {
         effect: 'fade',
         fadeEffect: {
             crossFade: true
-        },
-        watchOverflow: true,
-        watchSlidesVisibility: true,
-        // Отключаем перехват событий мыши Swiper'ом, чтобы не мешать Parallax
-        touchRatio: 0,
-        simulateTouch: false
+        }
     });
 
-    // Parallax initialization (disabled on mobile)
-    if (!/Mobi/.test(navigator.userAgent)) {
-        $('.js-parallax-scene').each(function() {
-            const parallax = new Parallax(this, {
-                relativeInput: true,
-                clipRelativeInput: false,
-                hoverOnly: false,
-                frictionX: 0.1,
-                frictionY: 0.1
-            });
-            console.log('Parallax initialized for:', this);
+    // Parallax effect
+    function applyParallaxToSlide(slide) {
+        const main = slide.querySelector('.image-main');
+        const blur = slide.querySelector('.image-blur');
 
-            // Отладка: проверяем события мыши
-            $(this).on('mousemove', function(e) {
-                console.log('Mouse moved over parallax scene:', e.pageX, e.pageY);
-            });
+        slide.addEventListener('mousemove', e => {
+            const x = e.clientX / window.innerWidth - 0.5;
+            const y = e.clientY / window.innerHeight - 0.5;
+
+            main.style.transform = `translate(-50%, -50%) rotate(-5deg) translate(${x * 30}px, ${y * 30}px)`;
+            blur.style.transform = `rotate(5deg) translate(${x * 15}px, ${y * 15}px)`;
         });
-    } else {
-        console.log('Parallax disabled on mobile');
+
+        slide.addEventListener('mouseleave', () => {
+            main.style.transform = 'translate(-50%, -50%) rotate(-5deg)';
+            blur.style.transform = 'rotate(5deg)';
+        });
     }
+
+    document.querySelectorAll('.parallax-slide').forEach(applyParallaxToSlide);
 
     // Buy now button logic
     $('.buy-now-btn').on('click', function(e) {

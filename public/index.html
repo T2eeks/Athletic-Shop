@@ -66,18 +66,14 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <div class="swiper-container product-carousel">
+                    <div class="swiper product-carousel">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <div class="carousel-item js-parallax-scene">
-                                    <div class="product-main">
-                                        <img src="img/products/creatine.png" alt="Creatin Gold Creatine" data-depth="0.2" onerror="this.src='https://via.placeholder.com/400x400?text=Creatine'">
-                                    </div>
-                                    <div class="product-shadow">
-                                        <img src="img/products/creatine.png" alt="Creatin Gold Creatine Shadow" data-depth="0.5" onerror="this.src='https://via.placeholder.com/400x400?text=Shadow'">
-                                    </div>
+                                <div class="parallax-slide" id="slide1">
+                                    <div class="parallax-image image-blur" style="background-image: url('img/products/creatine.png');"></div>
+                                    <div class="parallax-image image-main" style="background-image: url('img/products/creatine.png');"></div>
                                     <div class="product-info">
-                                        <div class="product-details" data-depth="0.3">
+                                        <div class="product-details">
                                             <h2>Creatin Gold Creatine</h2>
                                             <p>1000 г | 27 900 тенге</p>
                                         </div>
@@ -87,15 +83,11 @@
                             </div>
                             
                             <div class="swiper-slide">
-                                <div class="carousel-item js-parallax-scene">
-                                    <div class="product-main">
-                                        <img src="img/products/anabolic.png" alt="Anabolic" data-depth="0.2" onerror="this.src='https://via.placeholder.com/400x400?text=Anabolic'">
-                                    </div>
-                                    <div class="product-shadow">
-                                        <img src="img/products/anabolic.png" alt="Anabolic Shadow" data-depth="0.5" onerror="this.src='https://via.placeholder.com/400x400?text=Shadow'">
-                                    </div>
+                                <div class="parallax-slide" id="slide2">
+                                    <div class="parallax-image image-blur" style="background-image: url('img/products/anabolic.png');"></div>
+                                    <div class="parallax-image image-main" style="background-image: url('img/products/anabolic.png');"></div>
                                     <div class="product-info">
-                                        <div class="product-details" data-depth="0.3">
+                                        <div class="product-details">
                                             <h2>Anabolic</h2>
                                             <p>1000 г | 30 000 тенге</p>
                                         </div>
@@ -105,15 +97,11 @@
                             </div>
                             
                             <div class="swiper-slide">
-                                <div class="carousel-item js-parallax-scene">
-                                    <div class="product-main">
-                                        <img src="img/products/mutant.png" alt="Mutant" data-depth="0.2" onerror="this.src='https://via.placeholder.com/400x400?text=Mutant'">
-                                    </div>
-                                    <div class="product-shadow">
-                                        <img src="img/products/mutant.png" alt="Mutant Shadow" data-depth="0.5" onerror="this.src='https://via.placeholder.com/400x400?text=Shadow'">
-                                    </div>
+                                <div class="parallax-slide" id="slide3">
+                                    <div class="parallax-image image-blur" style="background-image: url('img/products/mutant.png');"></div>
+                                    <div class="parallax-image image-main" style="background-image: url('img/products/mutant.png');"></div>
                                     <div class="product-info">
-                                        <div class="product-details" data-depth="0.3">
+                                        <div class="product-details">
                                             <h2>Mutant</h2>
                                             <p>1000 г | 28 500 тенге</p>
                                         </div>
@@ -124,16 +112,8 @@
                         </div>
                         
                         <!-- Navigation Buttons -->
-                        <div class="swiper-button-prev">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c2ebff" stroke-width="2">
-                                <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                        </div>
-                        <div class="swiper-button-next">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c2ebff" stroke-width="2">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                         <!-- Pagination -->
                         <div class="swiper-pagination"></div>
                     </div>
@@ -161,7 +141,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
