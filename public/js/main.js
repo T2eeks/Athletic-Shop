@@ -19,11 +19,11 @@ $(document).ready(function() {
         grabCursor: true
     });
 
-    // Parallax effect на весь экран (движение от курсора)
-    function applyGlobalParallax() {
+    // Parallax effect при движении мыши
+    function applyMouseParallax() {
         window.addEventListener('mousemove', (e) => {
-            const x = -(e.clientX / window.innerWidth - 0.5); // Инвертируем X
-            const y = -(e.clientY / window.innerHeight - 0.5); // Инвертируем Y
+            const x = -(e.clientX / window.innerWidth - 0.5);
+            const y = -(e.clientY / window.innerHeight - 0.5);
 
             const activeSlide = document.querySelector('.swiper-slide-active');
             if (!activeSlide) return;
@@ -48,7 +48,7 @@ $(document).ready(function() {
         });
     }
 
-    applyGlobalParallax();
+    applyMouseParallax();
 
     // Buy now button logic
     $('.buy-now-btn').on('click', function(e) {
