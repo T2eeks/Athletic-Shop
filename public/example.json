@@ -1,0 +1,12 @@
+[
+    {
+        "id": "prod1",
+        "category": "creatine",
+        "brand": "Kevin Levrone",
+        "title": "Kevin Levrone Gold Creatine 1000г",
+        "description": "Высококачественный моногидрат креатина для повышения выносливости и силы.",
+        "extended-description": "Kevin Levrone Gold Creatine 1000г — это высококачественный моногидрат креатина, разработанный для повышения выносливости, силы и мышечной массы. Продукт обеспечивает максимальную эффективность благодаря чистому составу без добавок.",
+        "price": "27.900 ₸",
+        "image": "./img/products/creatine.png"
+    }
+]

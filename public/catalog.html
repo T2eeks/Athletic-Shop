@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог - Athletic</title>
-    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Muli&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
@@ -60,7 +60,7 @@
                  <div class="col-12 col-md-4">
                     <div class="dropdown">
                         <button class="btn category-filter-btn dropdown-toggle" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Все категории
+                            Выберите категорию
                         </button>
                         <div class="dropdown-menu" aria-labelledby="categoryDropdown">
                             <a class="dropdown-item" href="#" data-category="">Все категории</a>
@@ -74,15 +74,16 @@
             </div>
             <div class="row" id="product-list">
                 <!-- Example Product Card -->
-                <div class="col-12 col-md-6 col-lg-4 product-card" data-category="creatine">
-                    <div class="card-image" style="background-image: url('./img/products/creatine.png');"></div>
-                    <h3 class="card-title">Kevin Levrone Gold Creatine 1000г</h3>
-                    <p class="card-description">Высококачественный моногидрат креатина для повышения выносливости и силы.</p>
-                    <p class="card-price">27.900 ₸</p>
-                    <a href="#" class="buy-now-btn">Купить сейчас</a>
-                </div>
-                <!-- More product cards will be dynamically added here -->
+            <div class="col-12 col-md-6 col-lg-4 product-card" data-category="creatine" data-brand="Kevin Levrone" data-extended-description="Kevin Levrone Gold Creatine 1000г — это высококачественный моногидрат креатина, разработанный для повышения выносливости, силы и мышечной массы. Продукт обеспечивает максимальную эффективность благодаря чистому составу без добавок.">
+                <div class="card-image" style="background-image: url('./img/products/creatine.png');"></div>
+                <h3 class="card-title">Kevin Levrone Gold Creatine 1000г</h3>
+                <p class="card-description">Высококачественный моногидрат креатина для повышения выносливости и силы.</p>
+                <p class="card-price">27.900 ₸</p>
+                <a href="#" class="buy-now-btn">Купить сейчас</a>
             </div>
+            <!-- More product cards will be dynamically added here -->  
+            </div>
+            <div id="pagination" class="text-center mt-4"></div>
         </div>
     </section>
 
@@ -95,8 +96,8 @@
                     <div class="footer-logo">
                         <img src="img/logo.jpg" alt="Athletic Logo">
                     </div>
-                    <p>+7 (XXX) XXX-XX-XX</p>
-                    <p>г. Тараз, ул. Конаева, 15</p>
+                    <p>+7 (771) 863-99-86</p>
+                    <p>г. Тараз, ул. Конаева, 15, 2 этаж(17 бутик)</p>
                     <div class="social-icons">
                         <a href="https://wa.me/XXXXXXXXXX" target="_blank"><i class="fab fa-whatsapp"></i></a>
                         <a href="https://instagram.com/XXXXXXXX" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -125,7 +126,6 @@
     </footer>
     <!-- Footer Section End -->
 
-    <script src="./js/main.js"></script>
     <script src="./js/catalog.js"></script>
 </body>
 </html>
