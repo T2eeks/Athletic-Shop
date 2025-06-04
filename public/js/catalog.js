@@ -3,7 +3,7 @@ $(document).ready(function() {
     let currentPage = 1;
 
     function updatePagination() {
-        const $cards = $('.product-card:visible'); 
+        const $cards = $('.product-card:visible');
         const totalPages = Math.ceil($cards.length / cardsPerPage);
         $cards.hide();
         $cards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage).show();
@@ -26,34 +26,36 @@ $(document).ready(function() {
                 $(this).hide();
             }
         });
-        currentPage = 1; 
+        currentPage = 1;
         updatePagination();
     });
-
 
     $(document).on('click', '.page-btn', function() {
         currentPage = parseInt($(this).text());
         updatePagination();
     });
 
-
-    $('.product-card').on('click', function(e) {
-        if (!$(e.target).hasClass('buy-now-btn')) { 
+    $(document).on('click', '.product-card', function(e) {
+        if (!$(e.target).hasClass('buy-now-btn')) {
             e.preventDefault();
             const productName = $(this).find('.card-title').text();
-            const productPrice = $(this).find('.card-price').text();
             const productImage = $(this).find('.card-image').css('background-image').slice(4, -1).replace(/"/g, '');
-            const productDescription = $(this).data('extended-description') || $(this).find('.card-description').text();
+            const productPrice = $(this).find('.card-price').text();
+            const extendedDescription = $(this).attr('data-extended-description');
+            const productDescription = extendedDescription || $(this).find('.card-description').text() || 'Описание отсутствует';
             const productBrand = $(this).data('brand') || 'Не указан';
-            const productId = $(this).data('id') || Math.random().toString(36).substr(2, 9); // Уникальный ID для избранного
+            const productId = $(this).data('id') || Math.random().toString(36).substr(2, 9);
+            const productCategory = $(this).data('category');
 
             const modal = $(`
                 <div class="modal fade" id="productDetailModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="modal">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="productModalLabel">${productName}</h5>
-                                <button type="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
                             </div>
                             <div class="modal-body">
                                 <div class="row">
@@ -64,7 +66,6 @@ $(document).ready(function() {
                                         <p><strong>Бренд:</strong> ${productBrand}</p>
                                         <p><strong>Цена:</strong> ${productPrice}</p>
                                         <p><strong>Описание:</strong> ${productDescription}</p>
-                                        <button class="btn btn-warning add-to-favorites" data-product-id="${productId}" data-product-name="${productName}">Добавить в избранное</button>
                                         <a href="#" class="btn buy-now-btn mt-2">Купить сейчас</a>
                                     </div>
                                 </div>
@@ -76,98 +77,52 @@ $(document).ready(function() {
             $('body').append(modal);
             $('#productDetailModal').modal('show');
 
-            $('#productDetailModal').on('hidden.bs.modal', function () {
-                modal.remove();
+            $('#productDetailModal .buy-now-btn').on('click', function(e) {
+                e.preventDefault();
+                const priceValue = parseFloat(productPrice.replace('₸', '').replace('.', ''));
+                addToCart({ name: productName, price: priceValue });
+                alert('Товар добавлен в корзину!');
+                updateCartCount();
+                $('#productDetailModal').modal('hide');
             });
 
-            $('.add-to-favorites').on('click', function() {
-                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                if (!favorites.includes(productId)) {
-                    favorites.push({ id: productId, name: productName });
-                    localStorage.setItem('favorites', JSON.stringify(favorites));
-                    alert('Товар добавлен в избранное!');
-                } else {
-                    alert('Товар уже в избранном!');
-                }
+            $('#productDetailModal').on('hidden.bs.modal', function () {
+                modal.remove();
+                $('body').removeAttr('aria-hidden');
+                $('.modal-backdrop').remove();
             });
         }
     });
 
-    // Buy now button logic
-    $('.buy-now-btn').on('click', function(e) {
+    $(document).on('click', '.buy-now-btn', function(e) {
         e.preventDefault();
         const productName = $(this).closest('.product-card').find('.card-title').text();
-        const productPrice = $(this).closest('.product-card').find('.card-price').text();
+        const productPrice = parseFloat($(this).closest('.product-card').find('.card-price').text().replace('₸', '').replace('.', ''));
+        addToCart({ name: productName, price: productPrice });
+        alert('Товар добавлен в корзину!');
+        updateCartCount();
+    });
 
-        const modal = $(`
-            <div class="modal fade" id="orderModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Оформить заказ</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="orderForm">
-                                <div class="form-group">
-                                    <label for="productName">Товар</label>
-                                    <input type="text" class="form-control" id="productName" value="${productName}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="customerName">Ваше имя</label>
-                                    <input type="text" class="form-control" id="customerName" required>
-                                </div>
-                                <button type="submit" class="btn btn-danger">Отправить</button>
-                            </form>
-                        </div>
-                    </div>
+    $.getJSON('./products.json', function(products) {
+        const productList = $('#product-list');
+        products.forEach(product => {
+            if (!product['extended-description']) {
+                product['extended-description'] = 'Описание отсутствует';
+            }
+            productList.append(`
+                <div class="col-12 col-md-6 col-lg-4 product-card" data-category="${product.category}" data-brand="${product.brand}" data-extended-description="${product['extended-description'].replace(/"/g, '"')}" data-id="${product.id}">
+                    <div class="card-image" style="background-image: url('${product.image}');"></div>
+                    <h3 class="card-title">${product.title}</h3>
+                    <p class="card-description">${product.description}</p>
+                    <p class="card-price">${product.price}</p>
+                    <a href="#" class="buy-now-btn">Купить сейчас</a>
                 </div>
-            </div>
-        `);
-        $('body').append(modal);
-        $('#orderModal').modal('show');
-
-        $('#orderModal').on('hidden.bs.modal', function () {
-            modal.remove();
+            `);
         });
-
-        $('#orderForm').on('submit', function(e) {
-            e.preventDefault();
-            const product = $('#productName').val();
-            const name = $('#customerName').val();
-            const message = `Здравствуйте, хочу заказать ${product}. Имя: ${name}. Цена: ${productPrice}`;
-            const token = 'ВАШ_ТОКЕН';
-            const chat_id = 'ВАШ_CHAT_ID';
-            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.ok) {
-                        alert('Заказ отправлен!');
-                        $('#orderModal').modal('hide');
-                    } else {
-                        alert('Ошибка при отправке заказа.');
-                    }
-                });
-        });
+        updatePagination();
+    }).fail(function(jqxhr, textStatus, error) {
+        console.error('Error loading products.json:', textStatus, error);
     });
 
-$.getJSON('products.json', function(products) {
-    const productList = $('#product-list');
-    products.forEach(product => {
-        productList.append(`
-            <div class="col-12 col-md-6 col-lg-4 product-card" data-category="${product.category}" data-brand="${product.brand}" data-extended-description="${product.extendedDescription}" data-id="${product.id}">
-                <div class="card-image" style="background-image: url('${product.image}');"></div>
-                <h3 class="card-title">${product.title}</h3>
-                <p class="card-description">${product.description}</p>
-                <p class="card-price">${product.price}</p>
-                <a href="#" class="buy-now-btn">Купить сейчас</a>
-            </div>
-        `);
-    });
-    updatePagination(); 
-});
     updatePagination();
 });

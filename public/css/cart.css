@@ -1,0 +1,143 @@
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Изначально скрыта */
+    width: 400px;
+    height: 100%;
+    background-color: #490303;
+    color: #FFFFFF;
+    z-index: 1050;
+    transition: right 0.3s ease; /* Анимация выезда */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.open {
+    right: 0; /* Показываем с анимацией */
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040; /* Ниже корзины, но выше остального контента */
+    display: none;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cart-header h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-cart:hover {
+    color: #CCCCCC;
+}
+
+.cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cart-item p {
+    margin: 0;
+    font-family: 'Muli', sans-serif;
+}
+
+.cart-total {
+    margin-top: 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+}
+
+.cart-footer {
+    margin-top: 20px;
+}
+
+.checkout-btn {
+    width: 100%;
+    background-color: #333333;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover:not(:disabled) {
+    background-color: #444444;
+}
+
+.checkout-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.messenger-options {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.messenger-link {
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    flex: 1;
+    text-align: center;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.messenger-link.whatsapp {
+    background-color: #25D366;
+}
+
+.messenger-link.telegram {
+    background-color: #0088CC;
+}
+
+.messenger-link:hover {
+    opacity: 0.9;
+}
+
+/* Анимация на ПК и мобильных */
+@media (max-width: 576px) {
+    .cart-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+
+    .cart-sidebar.open {
+        right: 0;
+    }
+}

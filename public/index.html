@@ -2,30 +2,22 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Athletic Sports Nutrition">
-    <meta name="keywords" content="Athletic, sports, nutrition, creatine">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Athletic | Sports Nutrition</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
-
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-
-    <!-- Font Awesome -->
+    <title>Athletic - Спортивное питание</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Muli&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
+    <link rel="stylesheet" href="./css/cart.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
-
 <body>
-    <!-- Header Section Begin -->
+    <!-- Header Section -->
     <header class="header-section">
         <div class="container-fluid">
             <div class="row align-items-center">
@@ -34,21 +26,23 @@
                         <a href="./index.html">
                             <img src="img/logo.jpg" alt="Athletic Logo">
                         </a>
+                        <span class="site-name">atchletic.sport.taraz</span>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 d-none d-md-block">
                     <nav class="nav-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Главная</a></li>
-                            <li><a href="./catalog.html">Каталог</a></li>
+                            <li><a href="./index.html">Главная</a></li>
+                            <li class="active"><a href="./catalog.html">Каталог</a></li>
                             <li><a href="./contact.html">Контакты</a></li>
                         </ul>
                     </nav>
+                    <div id="mobile-menu-wrap"></div> 
                 </div>
                 <div class="col-lg-3 col-md-3 col-6 text-right">
                     <div class="top-option">
                         <div class="to-cart">
-                            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                            <a href="#" id="open-cart"><i class="fas fa-shopping-cart"></i><span class="cart-count"></span></a>
                         </div>
                         <div class="to-account">
                             <a href="#"><i class="fas fa-user"></i></a>
@@ -58,153 +52,146 @@
             </div>
         </div>
     </header>
-    <!-- Header End -->
 
-    <!-- Hero Section Begin -->
+    <div class="cart-overlay" id="cart-overlay" style="display: none;"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-total">
+            <p>Итоговая сумма: <span id="cart-total-price">0 ₸</span></p>
+        </div>
+        <div class="cart-footer">
+            <button class="btn checkout-btn" id="checkout-btn" disabled>Оформить заказ</button>
+            <div class="messenger-options" id="messenger-options" style="display: none;">
+                <a href="#" class="messenger-link whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="#" class="messenger-link telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="background-text">ATHLETIC</div>
-        <div class="swiper product-carousel">
-            <div class="swiper-wrapper">
-                <!-- Slide 1: Creatine -->
-                <div class="swiper-slide">
-                    <div class="parallax-slide" id="slide1">
-                        <div class="product-label">КРЕАТИН</div>
-                        <div class="parallax-image image-blur" style="background-image: url('img/products/creatine.png');"></div>
+        <div class="container">
+            <div class="product-carousel swiper">
+                <div class="swiper-wrapper">
+                    <!-- Creatine Slide -->
+                    <div class="swiper-slide parallax-slide">
                         <div class="parallax-image image-main" style="background-image: url('img/products/creatine.png');"></div>
+                        <div class="parallax-image image-blur" style="background-image: url('img/products/creatine.png');"></div>
+                        <div class="product-label">КРЕАТИН</div>
                         <div class="product-info-block">
-                            <div class="product-title">Kevin Levrone Gold Creatine 1000г</div>
-                            <div class="product-price">27.900 ₸</div>
+                            <h3 class="product-title">Kevin Levrone Gold Creatine 1000г</h3>
+                            <p class="product-price">27.900 ₸</p>
                             <a href="#" class="buy-now-btn">Купить сейчас</a>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Slide 2: Anabolic -->
-                <div class="swiper-slide">
-                    <div class="parallax-slide" id="slide2">
-                        <div class="product-label">АМИНО</div>
-                        <div class="parallax-image image-blur" style="background-image: url('img/products/anabolic.png');"></div>
+                    <!-- Amino Slide -->
+                    <div class="swiper-slide parallax-slide">
                         <div class="parallax-image image-main" style="background-image: url('img/products/anabolic.png');"></div>
+                        <div class="parallax-image image-blur" style="background-image: url('img/products/anabolic.png');"></div>
+                        <div class="product-label">АМИНО</div>
                         <div class="product-info-block">
-                            <div class="product-title">Kevin Levrone Anabolic Amino 300 таблеток</div>
-                            <div class="product-price">13.900 ₸</div>
+                            <h3 class="product-title">Kevin Levrone Anabolic Amino 300 таблеток</h3>
+                            <p class="product-price">13.900 ₸</p>
                             <a href="#" class="buy-now-btn">Купить сейчас</a>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Slide 3: Gainer -->
-                <div class="swiper-slide">
-                    <div class="parallax-slide" id="slide3">
-                        <div class="product-label">ГЕЙНЕР</div>
-                        <div class="parallax-image image-blur" style="background-image: url('img/products/mutant.png');"></div>
+                    <!-- Gainer Slide -->
+                    <div class="swiper-slide parallax-slide">
                         <div class="parallax-image image-main" style="background-image: url('img/products/mutant.png');"></div>
+                        <div class="parallax-image image-blur" style="background-image: url('img/products/mutant.png');"></div>
+                        <div class="product-label">ГЕЙНЕР</div>
                         <div class="product-info-block">
-                            <div class="product-title">Mutant Mass 2270 г</div>
-                            <div class="product-price">22.900 ₸</div>
+                            <h3 class="product-title">Mutant Mass 2270 г</h3>
+                            <p class="product-price">22.900 ₸</p>
                             <a href="#" class="buy-now-btn">Купить сейчас</a>
                         </div>
                     </div>
                 </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-            
-            <!-- Navigation Buttons -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
         </div>
     </section>
-    <!-- Hero Section End -->
 
-    <!-- Products Section Begin -->
+    <!-- Products Section -->
     <section class="products-section">
         <div class="background-wrapper">
-            <div class="background-text background-sports">SPORTS</div>
-            <div class="background-text background-nutrition">NUTRITION</div>
+            <div class="background-sports">SPORTS</div>
+            <div class="background-nutrition">NUTRITION</div>
         </div>
-        <h2 class="section-title">Спортивное питание</h2>
         <div class="container">
+            <h2 class="section-title">Спортивное питание</h2>
             <div class="row">
-                <!-- Card 1 -->
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="catalog.html" class="product-card">
-                        <div class="card-image" style="background-image: url('img/products/creatines.png');"></div>
-                        <div class="card-title">Креатины</div>
-                        <div class="view-all">Смотреть все</div>
-                    </a>
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <div class="card-image" style="background-image: url('img//products/creatines.png');"></div>
+                        <h3 class="card-title">Креатины</h3>
+                        <a href="./catalog.html" class="view-all">Смотреть все</a>
+                    </div>
                 </div>
-                <!-- Card 2 -->
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="catalog.html" class="product-card">
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
                         <div class="card-image" style="background-image: url('img/products/gainers.png');"></div>
-                        <div class="card-title">Гейнеры</div>
-                        <div class="view-all">Смотреть все</div>
-                    </a>
+                        <h3 class="card-title">Гейнеры</h3>
+                        <a href="./catalog.html" class="view-all">Смотреть все</a>
+                    </div>
                 </div>
-                <!-- Card 3 -->
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="catalog.html" class="product-card">
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
                         <div class="card-image" style="background-image: url('img/products/proteins.png');"></div>
-                        <div class="card-title">Протеины</div>
-                        <div class="view-all">Смотреть все</div>
-                    </a>
+                        <h3 class="card-title">Протеины</h3>
+                        <a href="./catalog.html" class="view-all">Смотреть все</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Products Section End -->
 
-     <!-- Brands Section Begin -->
+    <!-- Brands Section -->
     <section class="brands-section">
-        <div class="background-wrapper">
-            <div class="background-text background-brands">BRANDS</div>
-        </div>
-        <h2 class="section-title">БРЕНДЫ</h2>
+        <div class="background-brands">BRANDS</div>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <img src="img/brands/Kelvine-Levrone.png" alt="Genetic Club" class="brand-logo">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <img src="img/brands/maxler.png" alt="Maxler" class="brand-logo">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <img src="img/brands/optimum_ nutrition.png" alt="Optimum Nutrition" class="brand-logo optimum-nutrition">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <img src="img/brands/now.png" alt="NOW" class="brand-logo">
-                </div>
+            <h2 class="section-title">БРЕНДЫ</h2>
+            <div class="row text-center">
+                <div class="col-lg-3 col-md-6"><img src="img/brands/brand1.png" alt="Brand 1" class="brand-logo"></div>
+                <div class="col-lg-3 col-md-6"><img src="img/brands/brand2.png" alt="Brand 2" class="brand-logo"></div>
+                <div class="col-lg-3 col-md-6"><img src="img/brands/brand3.png" alt="Brand 3" class="brand-logo"></div>
+                <div class="col-lg-3 col-md-6"><img src="img/brands/brand4.png" alt="Brand 4" class="brand-logo optimum-nutrition"></div>
             </div>
         </div>
     </section>
-    <!-- Brands Section End -->
 
-    <!-- Footer Section Begin -->
+    <!-- Footer Section -->
     <footer class="footer-section">
         <div class="container">
             <div class="footer-content">
-                <!-- Column 1: Logo, Phone, Address -->
                 <div class="footer-column">
                     <div class="footer-logo">
                         <img src="img/logo.jpg" alt="Athletic Logo">
                     </div>
-                    <p>+7 (771) 863-99-86</p>
-                    <p>г. Тараз, ул. Конаева, 15, 2 этаж(17 бутик)</p>
+                    <p><a href="tel:+77718639986">+7 (771) 863-99-86</a></p>
+                    <p><a href="contact.html">г. Тараз, ул. Конаева, 15, 2 этаж (17 бутик)</a></p>
                     <div class="social-icons">
-                        <a href="https://wa.me/XXXXXXXXXX" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://instagram.com/XXXXXXXX" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="https://wa.me/XXXXXXXXXX"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/XXXXXXXX"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <!-- Column 2: Main Page -->
                 <div class="footer-column">
                     <h4>Навигация</h4>
                     <a href="./index.html">Перейти на главную</a>
                 </div>
-                <!-- Column 3: Catalog -->
                 <div class="footer-column">
                     <h4>Каталог</h4>
                     <a href="./catalog.html">Перейти к каталогу</a>
                 </div>
-                <!-- Column 4: Contacts -->
                 <div class="footer-column">
                     <h4>Контакты</h4>
                     <a href="./contact.html">Связаться с нами</a>
@@ -215,12 +202,10 @@
             </div>
         </div>
     </footer>
-    <!-- Footer Section End -->
 
-    <!-- JS Libraries -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="js/main.js"></script>
+
+    <script src="./js/cart.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/mobile-nav.js"></script>
 </body>
 </html>
