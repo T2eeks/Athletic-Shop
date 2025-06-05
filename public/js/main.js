@@ -55,8 +55,8 @@ $(document).ready(function() {
         e.preventDefault();
         const productName = $(this).closest('.product-info-block').find('.product-title').text();
         const productPrice = parseFloat($(this).closest('.product-info-block').find('.product-price').text().replace('₸', '').replace('.', ''));
-        window.addToCart({ name: productName, price: productPrice }); // Явно вызываем глобальную функцию
-        alert('Товар добавлен в корзину!');
-        window.updateCartCount(); // Явно вызываем глобальную функцию
+        window.addToCart({ name: productName, price: productPrice });
+        window.showNotification('Товар добавлен в корзину!'); // Replace alert
+        window.updateCartCount();
     });
 });

@@ -2,6 +2,15 @@ $(document).ready(function() {
     // Инициализация корзины (делаем cart глобальным)
     window.cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
+    // Функция для показа уведомления
+    function showNotification(message) {
+        $('#notification-message').text(message);
+        $('#notification').addClass('show');
+        setTimeout(() => {
+            $('#notification').removeClass('show');
+        }, 3000); // Уведомление исчезает через 3 секунды
+    }
+
     // Функция добавления в корзину
     window.addToCart = function(product) {
         const existingProduct = cart.find(item => item.name === product.name);
@@ -14,6 +23,7 @@ $(document).ready(function() {
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartDisplay();
         updateCartCount();
+        showNotification('Товар добавлен в корзину!'); // Заменяем alert
     };
 
     // Функция обновления отображения корзины
@@ -47,14 +57,14 @@ $(document).ready(function() {
     $('#open-cart').on('click', function(e) {
         e.preventDefault();
         $('#cart-sidebar').addClass('open');
-        $('#cart-overlay').fadeIn(300); // Показываем оверлей с анимацией
+        $('#cart-overlay').addClass('open');
         updateCartDisplay();
     });
 
     // Закрытие корзины
     $('#close-cart, #cart-overlay').on('click', function() {
         $('#cart-sidebar').removeClass('open');
-        $('#cart-overlay').fadeOut(300); // Скрываем оверлей с анимацией
+        $('#cart-overlay').removeClass('open');
     });
 
     // Показать опции мессенджеров
@@ -86,7 +96,7 @@ $(document).ready(function() {
 
         window.open(url, '_blank');
         $('#cart-sidebar').removeClass('open');
-        $('#cart-overlay').fadeOut(300); // Скрываем оверлей
+        $('#cart-overlay').removeClass('open');
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartDisplay();

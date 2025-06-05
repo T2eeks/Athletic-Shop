@@ -81,7 +81,7 @@ $(document).ready(function() {
                 e.preventDefault();
                 const priceValue = parseFloat(productPrice.replace('₸', '').replace('.', ''));
                 addToCart({ name: productName, price: priceValue });
-                alert('Товар добавлен в корзину!');
+                showNotification('Товар добавлен в корзину!'); // Заменяем alert
                 updateCartCount();
                 $('#productDetailModal').modal('hide');
             });
@@ -99,7 +99,7 @@ $(document).ready(function() {
         const productName = $(this).closest('.product-card').find('.card-title').text();
         const productPrice = parseFloat($(this).closest('.product-card').find('.card-price').text().replace('₸', '').replace('.', ''));
         addToCart({ name: productName, price: productPrice });
-        alert('Товар добавлен в корзину!');
+        showNotification('Товар добавлен в корзину!'); // Заменяем alert
         updateCartCount();
     });
 
