@@ -1,58 +1,83 @@
 $(document).ready(function() {
     const cardsPerPage = 6;
     let currentPage = 1;
+    let currentCategory = '';
+    let allProducts = [];
 
     function updatePagination() {
-        const $cards = $('.product-card:visible');
-        const totalPages = Math.ceil($cards.length / cardsPerPage);
-        $cards.hide();
-        $cards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage).show();
+        // Фильтруем продукты по текущей категории
+        let filteredProducts = currentCategory 
+            ? allProducts.filter(p => p.category === currentCategory) 
+            : allProducts;
 
-        $('#pagination').empty();
-        for (let i = 1; i <= totalPages; i++) {
-            $('#pagination').append(`<button class="page-btn ${i === currentPage ? 'active' : ''}">${i}</button>`);
+        const totalPages = Math.ceil(filteredProducts.length / cardsPerPage);
+
+        // Корректируем текущую страницу, если она выходит за пределы
+        if (totalPages > 0 && currentPage > totalPages) {
+            currentPage = totalPages;
+        } else if (totalPages === 0) {
+            currentPage = 1;
         }
+
+        // Скрываем все карточки
+        $('.product-card').hide();
+
+        // Показываем только карточки для текущей страницы
+        const startIndex = (currentPage - 1) * cardsPerPage;
+        const endIndex = startIndex + cardsPerPage;
+        const productsToShow = filteredProducts.slice(startIndex, endIndex);
+
+        // Показываем соответствующие карточки
+        productsToShow.forEach(product => {
+            $(`.product-card[data-id="${product.id}"]`).show();
+        });
+
+        // Обновляем пагинацию
+        $('#pagination').empty();
+        if (totalPages > 1) {
+            for (let i = 1; i <= totalPages; i++) {
+                $('#pagination').append(`<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`);
+            }
+        } else if (filteredProducts.length === 0) {
+            $('#pagination').html('<p>Товары не найдены</p>');
+        }
+
+        // Плавный скролл вверх
+        $('html, body').animate({ scrollTop: 0 }, 500);
     }
 
     $('.dropdown-item').on('click', function(e) {
         e.preventDefault();
-        const selectedCategory = $(this).data('category');
+        currentCategory = $(this).data('category');
         $('.category-filter-btn').text($(this).text());
-        $('.product-card').each(function() {
-            const cardCategory = $(this).data('category');
-            if (!selectedCategory || cardCategory === selectedCategory) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
         currentPage = 1;
         updatePagination();
     });
 
-    $(document).on('click', '.page-btn', function() {
-        currentPage = parseInt($(this).text());
-        updatePagination();
+    $(document).on('click', '.page-btn', function(e) {
+        e.preventDefault();
+        const newPage = parseInt($(this).data('page'));
+        if (newPage !== currentPage) {
+            currentPage = newPage;
+            updatePagination();
+        }
     });
 
+    // Остальной код (модальное окно и добавление в корзину) остается без изменений
     $(document).on('click', '.product-card', function(e) {
         if (!$(e.target).hasClass('buy-now-btn')) {
             e.preventDefault();
-            const productName = $(this).find('.card-title').text();
-            const productImage = $(this).find('.card-image').css('background-image').slice(4, -1).replace(/"/g, '');
-            const productPrice = $(this).find('.card-price').text();
-            const extendedDescription = $(this).attr('data-extended-description');
-            const productDescription = extendedDescription || $(this).find('.card-description').text() || 'Описание отсутствует';
-            const productBrand = $(this).data('brand') || 'Не указан';
-            const productId = $(this).data('id') || Math.random().toString(36).substr(2, 9);
-            const productCategory = $(this).data('category');
+            const productId = $(this).data('id');
+            const product = allProducts.find(p => p.id === productId);
+            
+            if (!product) return;
 
             const modal = $(`
                 <div class="modal fade" id="productDetailModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="productModalLabel">${productName}</h5>
+                                <h5 class="modal-title" id="productModalLabel">${product.title}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -60,12 +85,12 @@ $(document).ready(function() {
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <img src="${productImage}" alt="${productName}" class="img-fluid product-detail-image">
+                                        <img src="${product.image}" alt="${product.title}" class="img-fluid product-detail-image">
                                     </div>
                                     <div class="col-md-6">
-                                        <p><strong>Бренд:</strong> ${productBrand}</p>
-                                        <p><strong>Цена:</strong> ${productPrice}</p>
-                                        <p><strong>Описание:</strong> ${productDescription}</p>
+                                        <p><strong>Бренд:</strong> ${product.brand}</p>
+                                        <p><strong>Цена:</strong> ${product.price}</p>
+                                        <p><strong>Описание:</strong> ${product['extended-description'] || product.description || 'Описание отсутствует'}</p>
                                         <a href="#" class="btn buy-now-btn mt-2">Купить сейчас</a>
                                     </div>
                                 </div>
@@ -79,9 +104,14 @@ $(document).ready(function() {
 
             $('#productDetailModal .buy-now-btn').on('click', function(e) {
                 e.preventDefault();
-                const priceValue = parseFloat(productPrice.replace('₸', '').replace('.', ''));
-                addToCart({ name: productName, price: priceValue });
-                showNotification('Товар добавлен в корзину!'); // Заменяем alert
+                const priceValue = parseFloat(product.price.replace('₸', '').replace(/\./g, '').replace(',', '.'));
+                addToCart({ 
+                    id: product.id,
+                    name: product.title, 
+                    price: priceValue,
+                    image: product.image
+                });
+                showNotification('Товар добавлен в корзину!');
                 updateCartCount();
                 $('#productDetailModal').modal('hide');
             });
@@ -96,21 +126,35 @@ $(document).ready(function() {
 
     $(document).on('click', '.buy-now-btn', function(e) {
         e.preventDefault();
-        const productName = $(this).closest('.product-card').find('.card-title').text();
-        const productPrice = parseFloat($(this).closest('.product-card').find('.card-price').text().replace('₸', '').replace('.', ''));
-        addToCart({ name: productName, price: productPrice });
-        showNotification('Товар добавлен в корзину!'); // Заменяем alert
+        const productId = $(this).closest('.product-card').data('id');
+        const product = allProducts.find(p => p.id === productId);
+        
+        if (!product) return;
+        
+        const priceValue = parseFloat(product.price.replace('₸', '').replace(/\./g, '').replace(',', '.'));
+        addToCart({ 
+            id: product.id,
+            name: product.title, 
+            price: priceValue,
+            image: product.image
+        });
+        showNotification('Товар добавлен в корзину!');
         updateCartCount();
     });
 
     $.getJSON('./products.json', function(products) {
+        allProducts = products;
         const productList = $('#product-list');
+        
+        // Очищаем список перед добавлением
+        productList.empty();
+        
         products.forEach(product => {
             if (!product['extended-description']) {
                 product['extended-description'] = 'Описание отсутствует';
             }
             productList.append(`
-                <div class="col-12 col-md-6 col-lg-4 product-card" data-category="${product.category}" data-brand="${product.brand}" data-extended-description="${product['extended-description'].replace(/"/g, '"')}" data-id="${product.id}">
+                <div class="col-12 col-md-6 col-lg-4 product-card" data-category="${product.category}" data-brand="${product.brand}" data-extended-description="${product['extended-description'].replace(/"/g, '&quot;')}" data-id="${product.id}">
                     <div class="card-image" style="background-image: url('${product.image}');"></div>
                     <h3 class="card-title">${product.title}</h3>
                     <p class="card-description">${product.description}</p>
@@ -119,10 +163,9 @@ $(document).ready(function() {
                 </div>
             `);
         });
+        
         updatePagination();
     }).fail(function(jqxhr, textStatus, error) {
         console.error('Error loading products.json:', textStatus, error);
     });
-
-    updatePagination();
 });

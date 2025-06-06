@@ -42,14 +42,71 @@
                         <a href="#" id="open-cart"><i class="fas fa-shopping-cart"></i><span class="cart-count"></span></a>
                     </div>
                     <div class="to-account">
-                        <a href="#"><i class="fas fa-user"></i></a>
+                        <a href="#" id="account-link"><i class="fas fa-user"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    
+    <!-- Модальное окно для аккаунта -->
+    <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="accountModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="accountModalLabel">Аккаунт</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="accountTabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab">Вход</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab">Регистрация</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="accountTabsContent">
+                        <!-- Форма входа -->
+                        <div class="tab-pane fade show active" id="login" role="tabpanel">
+                            <form id="login-form" class="mt-3">
+                                <div class="form-group">
+                                    <label for="login-email">Email</label>
+                                    <input type="email" class="form-control" id="login-email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="login-password">Пароль</label>
+                                    <input type="password" class="form-control" id="login-password" required>
+                                </div>
+                                <button type="submit" class="btn btn-danger">Войти</button>
+                            </form>
+                        </div>
+                        <!-- Форма регистрации -->
+                        <div class="tab-pane fade" id="register" role="tabpanel">
+                            <form id="register-form" class="mt-3">
+                                <div class="form-group">
+                                    <label for="register-name">Имя</label>
+                                    <input type="text" class="form-control" id="register-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-email">Email</label>
+                                    <input type="email" class="form-control" id="register-email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-password">Пароль</label>
+                                    <input type="password" class="form-control" id="register-password" required>
+                                </div>
+                                <button type="submit" class="btn btn-danger">Зарегистрироваться</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Mobile Menu Sidebar -->
     <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
     <div class="mobile-menu-sidebar" id="mobile-menu-sidebar">
@@ -215,7 +272,7 @@
     </footer>
 
     <div id="notification" class="notification">
-    <p id="notification-message"></p>
+        <p id="notification-message"></p>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -223,6 +280,7 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="./js/cart.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/account.js"></script>
     <script src="./js/mobile-nav.js"></script>
 </body>
 </html>

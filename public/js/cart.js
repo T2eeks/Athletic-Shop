@@ -8,7 +8,7 @@ $(document).ready(function() {
         $('#notification').addClass('show');
         setTimeout(() => {
             $('#notification').removeClass('show');
-        }, 3000); // Уведомление исчезает через 3 секунды
+        }, 3000);
     }
 
     // Функция добавления в корзину
@@ -23,7 +23,23 @@ $(document).ready(function() {
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartDisplay();
         updateCartCount();
-        showNotification('Товар добавлен в корзину!'); // Заменяем alert
+        showNotification('Товар добавлен в корзину!');
+    };
+
+    // Функция удаления из корзины
+    window.removeFromCart = function(productName) {
+        const productIndex = cart.findIndex(item => item.name === productName);
+        if (productIndex !== -1) {
+            if (cart[productIndex].quantity > 1) {
+                cart[productIndex].quantity -= 1;
+            } else {
+                cart.splice(productIndex, 1);
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+            updateCartCount();
+            showNotification('Товар удален из корзины!');
+        }
     };
 
     // Функция обновления отображения корзины
@@ -39,6 +55,7 @@ $(document).ready(function() {
                 <div class="cart-item">
                     <p>${item.name} (x${item.quantity})</p>
                     <p>${itemTotal.toLocaleString()} ₸</p>
+                    <button class="remove-item" data-name="${item.name}">Удалить</button>
                 </div>
             `);
         });
@@ -65,6 +82,12 @@ $(document).ready(function() {
     $('#close-cart, #cart-overlay').on('click', function() {
         $('#cart-sidebar').removeClass('open');
         $('#cart-overlay').removeClass('open');
+    });
+
+    // Удаление товара
+    $(document).on('click', '.remove-item', function() {
+        const productName = $(this).data('name');
+        removeFromCart(productName);
     });
 
     // Показать опции мессенджеров

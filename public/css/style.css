@@ -72,12 +72,19 @@ body {
     white-space: nowrap;
 }
 
+.nav-menu {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start; 
+    padding-left: 50px; 
+}
 
 .nav-menu ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; 
     padding: 0;
+    margin: 0;
 }
 
 .nav-menu ul li {
@@ -559,6 +566,16 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
+#product-list.row {
+    gap: 1rem; 
+    justify-content: center;
+}
+.product-card {
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    
+}
 .product-card:hover {
     background: #E0E0E0;
     transform: translateY(-5px);
@@ -837,7 +854,7 @@ body {
 /* === ПЛАВНЫЙ ПЕРЕХОД МЕЖДУ БЛОКАМИ === */
 /* ====================== */
 .hero-section, .products-section {
-    position: relative; /* Убираем sticky */
+    position: relative; 
     background-color: #000000;
 }
 
@@ -1077,9 +1094,6 @@ body {
     .brand-logo.optimum-nutrition {
         max-height: 70px;
     }
-}
-.product-card {
-    margin: 20px; 
 }
 
 /* ====================== */
