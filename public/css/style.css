@@ -144,7 +144,7 @@ body {
 /* === ГЛАВНЫЙ БАННЕР === */
 /* ====================== */
 .hero-section {
-    padding: 30px 0;
+    padding: 10px 0;
     color: #FFFFFF;
     position: relative;
     z-index: 1;
@@ -228,7 +228,7 @@ body {
     height: 300px;
     z-index: 1;
     top: 45%; 
-    left: 20%;
+    left: 1%;
     filter: blur(15px);
     opacity: 0.3;
     transform: rotate(5deg);
@@ -344,7 +344,6 @@ body {
 /* ====================== */
 /* === МОДАЛЬНОЕ ОКНО === */
 /* ====================== */
-
 .modal-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 700; 
@@ -826,28 +825,35 @@ body {
     }
 }
 
-@media (max-width: 576px) {
-    .background-catalog {
-        top: 3vh;
-        font-size: 10vw;
-    }
+/* ====================== */
+/* === ПЛАВНЫЙ ПЕРЕХОД МЕЖДУ БЛОКАМИ === */
+/* ====================== */
+.hero-section, .products-section {
+    position: relative; 
+    background-color: #000000;
+}
 
-    .card-title {
-        font-size: 2.5vw;
-    }
+.products-section {
+    background-color: #490303;
+}
 
-    .card-description {
-        font-size: 0.8rem;
-    }
+.hero-section::after, .products-section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    z-index: 1;
+}
 
-    .card-price {
-        font-size: 1.2rem;
-    }
+.hero-section::after {
+    bottom: -100px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(73, 3, 3, 1));
+}
 
-    .buy-now-btn {
-        padding: 8px 20px;
-        font-size: 1.5vw;
-    }
+.products-section::before {
+    top: -200px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(73, 3, 3, 1));
 }
 
 /* ====================== */
@@ -913,7 +919,7 @@ body {
     }
 
     .product-label {
-        font-size: 4vw;
+        font-size: 6vw !important;
     }
 
     .product-title {
@@ -968,13 +974,22 @@ body {
         max-height: 60px;
     }
 
-
     .brand-logo.optimum-nutrition {
         max-height:  80px;
     }
 }
 
 @media (max-width: 576px) {
+    .top-option {
+        justify-content: flex-end;
+        gap: 10px; /* Уменьшаем расстояние между иконками */
+        margin-right: 10px; /* Уменьшаем отступ справа */
+    }
+
+    .to-cart a, .to-account a {
+        font-size: 20px; /* Уменьшаем размер иконок для компактности */
+    }
+
     .site-name {
         font-size: 1rem; 
         margin-left: 5px; 
@@ -994,8 +1009,49 @@ body {
         flex-wrap: nowrap; /* Предотвращаем перенос на новую строку */
     }
 
+    .header-section {
+        padding: 5px 0; /* Уменьшаем отступы шапки */
+    }
+
+    .hero-section {
+        padding: 5px 0; /* Уменьшаем с 10px до 5px */
+    }
+
+    .product-carousel {
+        min-height: 50vh;
+        padding: 2px 0 !important; /* Уменьшаем с 20px до 10px */
+        margin-top: 0; /* Убираем лишний отступ сверху */
+    }
+
+    .swiper-slide {
+        height: 20vh !important; /* Уменьшаем высоту слайда с 80vh до 60vh */
+        padding: 10px 0; /* Уменьшаем внутренние отступы */
+    }
+
+    .background-catalog {
+        top: 3vh;
+        font-size: 10vw;
+    }
+
+    .card-title {
+        font-size: 2.5vw;
+    }
+
+    .card-description {
+        font-size: 0.8rem;
+    }
+
+    .card-price {
+        font-size: 1.2rem;
+    }
+
+    .buy-now-btn {
+        padding: 8px 20px;
+        font-size: 1.5vw;
+    }
+
     .background-text {
-        font-size: 8vw;
+        font-size: 23vw;
     }
 
     .background-sports {
@@ -1012,7 +1068,7 @@ body {
     }
 
     .image-main {
-        width: 50vw;
+        width: 40vw;
         height: 25vh;
     }
 
@@ -1026,23 +1082,23 @@ body {
     }
 
     .product-info-block {
-        width: 50%;
-        right: 2%;
-        padding: 15px;
+        width: 40%;
+        right: 0%;
+        padding: 0px;
     }
 
     .product-title {
-        font-size: 2vw;
+        font-size: 3.5vw;
         margin-bottom: 30px;
     }
 
     .product-price {
-        font-size: 1.5vw;
+        font-size: 4vw;
     }
 
     .buy-now-btn {
         padding: 8px 20px;
-        font-size: 1.5vw;
+        font-size: 3vw;
     }
 
     .swiper-button-next, .swiper-button-prev {
@@ -1059,15 +1115,15 @@ body {
     }
 
     .card-image {
-        height: 15vh;
+        height: 25vh;
     }
 
     .card-title {
-        font-size: 2.5vw;
+        font-size: 7vw;
     }
 
     .view-all {
-        font-size: 1.5vw;
+        font-size: 3vw;
     }
 
     .footer-column {
@@ -1082,9 +1138,10 @@ body {
     .footer-logo img {
         margin: 0 auto;
     }
+
     .background-brands {
-        top: 3vh;
-        font-size: 10vw;
+        top: 1vh;
+        font-size: 20vw;
     }
 
     .brand-logo {
@@ -1171,26 +1228,6 @@ body {
     color: #CCCCCC;
 }
 
-/* Плавный переход между секциями */
-.contacts-section::after, .social-contacts-section::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    z-index: 1;
-}
-
-.contacts-section::after {
-    bottom: -50px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(73, 3, 3, 1));
-}
-
-.social-contacts-section::before {
-    top: -100px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(73, 3, 3, 1));
-}
-
 /* Адаптивность */
 @media (max-width: 991px) {
     .background-contacts {
@@ -1233,7 +1270,7 @@ body {
 .mobile-menu-btn {
     background: transparent;
     border: none;
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -1247,8 +1284,9 @@ body {
     display: block;
     width: 100%;
     height: 4px;
-    background: #FFFFFF;
+    background: #ffffff;
     transition: all 0.3s ease;
+    margin: 2px 0; 
 }
 
 .mobile-menu-btn.open .menu-icon:nth-child(1) {

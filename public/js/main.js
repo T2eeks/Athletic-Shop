@@ -3,7 +3,7 @@ $(document).ready(function() {
     const swiper = new Swiper('.product-carousel', {
         loop: true,
         autoplay: {
-            delay: 5000,
+            delay: 123123000,
             disableOnInteraction: false,
         },
         navigation: {
