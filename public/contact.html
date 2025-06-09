@@ -16,11 +16,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
 </head>
 <body>
-    <!-- Header Section -->
     <header class="header-section">
         <div class="container">
             <div class="d-flex align-items-center flex-nowrap">
-                <!-- Бургер-кнопка левее логотипа -->
                 <button id="open-mobile-menu" class="mobile-menu-btn d-block d-sm-none">
                     <span class="menu-icon"></span>
                     <span class="menu-icon"></span>
@@ -53,7 +51,6 @@
         </div>
     </header>
 
-     <!-- Модальное окно для аккаунта -->
     <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="accountModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -73,7 +70,6 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="accountTabsContent">
-                        <!-- Форма входа -->
                         <div class="tab-pane fade show active" id="login" role="tabpanel">
                             <form id="login-form" class="mt-3">
                                 <div class="form-group">
@@ -87,7 +83,6 @@
                                 <button type="submit" class="btn btn-danger">Войти</button>
                             </form>
                         </div>
-                        <!-- Форма регистрации -->
                         <div class="tab-pane fade" id="register" role="tabpanel">
                             <form id="register-form" class="mt-3">
                                 <div class="form-group">
@@ -111,7 +106,6 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Sidebar -->
     <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
     <div class="mobile-menu-sidebar" id="mobile-menu-sidebar">
         <div class="mobile-menu-header">
@@ -128,7 +122,6 @@
     <div class="cart-overlay" id="cart-overlay"></div>
     
 
-    <!-- Cart Sidebar -->
     <div class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
             <h3>Корзина</h3>
@@ -147,7 +140,6 @@
         </div>
     </div>
 
-    <!-- Секция контактов -->
     <section class="contacts-section">
         <div class="background-wrapper">
             <div class="background-contacts">CONTACTS</div>
@@ -167,8 +159,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Секция с номером телефона и соцсетями -->
+>
     <section class="social-contacts-section">
         <div class="container">
             <h2 class="section-title">Контакты</h2>
@@ -181,15 +172,15 @@
                         </div>
                         <div class="contact-item">
                             <i class="fab fa-telegram-plane"></i>
-                            <a href="https://t.me/xxxxxxxx" target="_blank">Telegram</a>
+                            <a href="https://t.me/athletic_8" target="_blank">Telegram</a>
                         </div>
                         <div class="contact-item">
                             <i class="fab fa-whatsapp"></i>
-                            <a href="https://wa.me/xxxxxxxxxx" target="_blank">WhatsApp</a>
+                            <a href="https://wa.me/" target="_blank">WhatsApp</a>
                         </div>
                         <div class="contact-item">
                             <i class="fab fa-instagram"></i>
-                            <a href="https://instagram.com/xxxxxxxx" target="_blank">Instagram</a>
+                            <a href="https://instagram.com/athletic.sport.taraz" target="_blank">Instagram</a>
                         </div>
                     </div>
                 </div>
@@ -197,7 +188,6 @@
         </div>
     </section>
 
-    <!-- Подвал -->
       <footer class="footer-section">
         <div class="container">
             <div class="footer-content">
@@ -208,9 +198,9 @@
                     <p><a href="tel:+77718639986">+7 (771) 863-99-86</a></p>
                     <p><a href="contact.html">г. Тараз, ул. Конаева, 15, 2 этаж (17 бутик)</a></p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="https://wa.me/XXXXXXXXXX"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://instagram.com/XXXXXXXX"><i class="fab fa-instagram"></i></a>
+                        <a href="https://t.me/athletic_8"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="https://wa.me/"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/athletic.sport.taraz"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -232,11 +222,10 @@
         </div>
     </footer>
 
-    <!-- Скрипт для карты -->
     <script>
         ymaps.ready(function () {
             var myMap = new ymaps.Map("map", {
-                center: [42.892755, 71.375147], // Координаты Тараза, ул. Конаева 15
+                center: [42.892755, 71.375147], 
                 zoom: 15
             });
 

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Swiper initialization with touch support
     const swiper = new Swiper('.product-carousel', {
         loop: true,
         autoplay: {
@@ -19,7 +18,6 @@ $(document).ready(function() {
         grabCursor: true
     });
 
-    // Parallax effect при движении мыши
     function applyMouseParallax() {
         window.addEventListener('mousemove', (e) => {
             const x = -(e.clientX / window.innerWidth - 0.5);
@@ -50,13 +48,12 @@ $(document).ready(function() {
 
     applyMouseParallax();
 
-    // Buy now button logic
     $('.buy-now-btn').on('click', function(e) {
         e.preventDefault();
         const productName = $(this).closest('.product-info-block').find('.product-title').text();
         const productPrice = parseFloat($(this).closest('.product-info-block').find('.product-price').text().replace('₸', '').replace('.', ''));
         window.addToCart({ name: productName, price: productPrice });
-        window.showNotification('Товар добавлен в корзину!'); // Replace alert
+        window.showNotification('Товар добавлен в корзину!'); 
         window.updateCartCount();
     });
 });

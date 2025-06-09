@@ -5,34 +5,27 @@ $(document).ready(function() {
     let allProducts = [];
 
     function updatePagination() {
-        // Фильтруем продукты по текущей категории
         let filteredProducts = currentCategory 
             ? allProducts.filter(p => p.category === currentCategory) 
             : allProducts;
 
         const totalPages = Math.ceil(filteredProducts.length / cardsPerPage);
 
-        // Корректируем текущую страницу, если она выходит за пределы
         if (totalPages > 0 && currentPage > totalPages) {
             currentPage = totalPages;
         } else if (totalPages === 0) {
             currentPage = 1;
         }
-
-        // Скрываем все карточки
         $('.product-card').hide();
 
-        // Показываем только карточки для текущей страницы
         const startIndex = (currentPage - 1) * cardsPerPage;
         const endIndex = startIndex + cardsPerPage;
         const productsToShow = filteredProducts.slice(startIndex, endIndex);
 
-        // Показываем соответствующие карточки
         productsToShow.forEach(product => {
             $(`.product-card[data-id="${product.id}"]`).show();
         });
 
-        // Обновляем пагинацию
         $('#pagination').empty();
         if (totalPages > 1) {
             for (let i = 1; i <= totalPages; i++) {
@@ -42,7 +35,6 @@ $(document).ready(function() {
             $('#pagination').html('<p>Товары не найдены</p>');
         }
 
-        // Плавный скролл вверх
         $('html, body').animate({ scrollTop: 0 }, 500);
     }
 
@@ -63,7 +55,6 @@ $(document).ready(function() {
         }
     });
 
-    // Остальной код (модальное окно и добавление в корзину) остается без изменений
     $(document).on('click', '.product-card', function(e) {
         if (!$(e.target).hasClass('buy-now-btn')) {
             e.preventDefault();
@@ -146,7 +137,6 @@ $(document).ready(function() {
         allProducts = products;
         const productList = $('#product-list');
         
-        // Очищаем список перед добавлением
         productList.empty();
         
         products.forEach(product => {
@@ -154,7 +144,7 @@ $(document).ready(function() {
                 product['extended-description'] = 'Описание отсутствует';
             }
             productList.append(`
-                <div class="col-12 col-md-6 col-lg-4 product-card" data-category="${product.category}" data-brand="${product.brand}" data-extended-description="${product['extended-description'].replace(/"/g, '&quot;')}" data-id="${product.id}">
+                <div class="col-12 col-md-4 col-lg-4 product-card" data-category="${product.category}" data-brand="${product.brand}" data-extended-description="${product['extended-description'].replace(/"/g, '&quot;')}" data-id="${product.id}">
                     <div class="card-image" style="background-image: url('${product.image}');"></div>
                     <h3 class="card-title">${product.title}</h3>
                     <p class="card-description">${product.description}</p>

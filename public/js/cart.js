@@ -1,8 +1,6 @@
 $(document).ready(function() {
-    // Инициализация корзины (делаем cart глобальным)
     window.cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-    // Функция для показа уведомления
     function showNotification(message) {
         $('#notification-message').text(message);
         $('#notification').addClass('show');
@@ -11,7 +9,6 @@ $(document).ready(function() {
         }, 3000);
     }
 
-    // Функция добавления в корзину
     window.addToCart = function(product) {
         const existingProduct = cart.find(item => item.name === product.name);
         if (existingProduct) {
@@ -26,7 +23,6 @@ $(document).ready(function() {
         showNotification('Товар добавлен в корзину!');
     };
 
-    // Функция удаления из корзины
     window.removeFromCart = function(productName) {
         const productIndex = cart.findIndex(item => item.name === productName);
         if (productIndex !== -1) {
@@ -42,7 +38,6 @@ $(document).ready(function() {
         }
     };
 
-    // Функция обновления отображения корзины
     function updateCartDisplay() {
         const cartItems = $('#cart-items');
         cartItems.empty();
@@ -63,14 +58,12 @@ $(document).ready(function() {
         $('#cart-total-price').text(`${totalPrice.toLocaleString()} ₸`);
         $('#checkout-btn').prop('disabled', cart.length === 0);
     }
-
-    // Функция обновления количества товаров в корзине
+е
     window.updateCartCount = function() {
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         $('.cart-count').text(totalItems > 0 ? ` (${totalItems})` : '');
     };
 
-    // Открытие корзины
     $('#open-cart').on('click', function(e) {
         e.preventDefault();
         $('#cart-sidebar').addClass('open');
@@ -78,24 +71,21 @@ $(document).ready(function() {
         updateCartDisplay();
     });
 
-    // Закрытие корзины
     $('#close-cart, #cart-overlay').on('click', function() {
         $('#cart-sidebar').removeClass('open');
         $('#cart-overlay').removeClass('open');
     });
 
-    // Удаление товара
     $(document).on('click', '.remove-item', function() {
         const productName = $(this).data('name');
         removeFromCart(productName);
     });
 
-    // Показать опции мессенджеров
+
     $('#checkout-btn').on('click', function() {
         $('#messenger-options').toggle();
     });
 
-    // Оформление заказа
     $('.messenger-link').on('click', function(e) {
         e.preventDefault();
         const messenger = $(this).hasClass('whatsapp') ? 'whatsapp' : 'telegram';
@@ -112,7 +102,7 @@ $(document).ready(function() {
 
         let url;
         if (messenger === 'whatsapp') {
-            url = `https://wa.me/xxxxxxxxxx?text=${encodeURIComponent(message)}`;
+            url = `https://wa.me/?text=${encodeURIComponent(message)}`;
         } else {
             url = `https://t.me/athletic_8?text=${encodeURIComponent(message)}`;
         }
@@ -126,6 +116,5 @@ $(document).ready(function() {
         updateCartCount();
     });
 
-    // Инициализация при загрузке
     updateCartCount();
 });

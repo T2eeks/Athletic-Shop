@@ -709,6 +709,9 @@ body {
     position: relative;
     opacity: 0;
     animation: fadeInSection 1s ease 1.5s forwards;
+    min-height: 50vh; 
+    overflow: visible;
+
 }
 
 .background-catalog {
@@ -725,7 +728,7 @@ body {
     white-space: nowrap;
     text-align: center;
     top: 5vh;
-    System: transform skewX(-12deg);
+    transform: skewX(-12deg);
 }
 
 .category-filter-btn {
@@ -828,6 +831,26 @@ body {
 /* ====================== */
 /* === ПЛАВНЫЙ ПЕРЕХОД МЕЖДУ БЛОКАМИ === */
 /* ====================== */
+/* Плавный переход между секциями (контакты) */
+.contacts-section::after, .social-contacts-section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 1;
+}
+
+.contacts-section::after {
+    bottom: -50px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(73, 3, 3, 1));
+}
+
+.social-contacts-section::before {
+    top: -100px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(73, 3, 3, 1));
+}
+
 .hero-section, .products-section {
     position: relative; 
     background-color: #000000;
@@ -854,6 +877,28 @@ body {
 .products-section::before {
     top: -200px;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(73, 3, 3, 1));
+}
+
+@media (min-width: 577px) and (max-width: 991px) {
+    .contacts-section {
+        padding: 80px 0; /* Уменьшаем отступы для компактности */
+    }
+
+    .social-contacts-section {
+        padding: 40px 0;
+    }
+
+    .contacts-section::after, .social-contacts-section::before {
+        height: 80px; /* Уменьшаем высоту градиента для планшетов */
+    }
+
+    .contacts-section::after {
+        bottom: -40px;
+    }
+
+    .social-contacts-section::before {
+        top: -80px;
+    }
 }
 
 /* ====================== */
@@ -891,6 +936,13 @@ body {
 /* === АДАПТИВНОСТЬ === */
 /* ====================== */
 @media (max-width: 991px) {
+    .nav-menu ul li {
+        margin: 0 10px; 
+    }
+    .nav-menu ul li a {
+        font-size: 1.2rem; 
+        padding: 5px 10px; 
+    }
     .background-text {
         font-size: 10vw; 
     }
@@ -909,13 +961,14 @@ body {
     }
 
     .image-main {
-        width: 40vw;
+        width: 35vw;
         height: 35vh;
     }
 
     .image-blur {
         width: 30vw;
         height: 20vh;
+        top: 48%;
     }
 
     .product-label {
@@ -923,17 +976,17 @@ body {
     }
 
     .product-title {
-        font-size: 1.6vw;
+        font-size: 2.2vw;
         margin-bottom: 40px;
     }
 
     .product-price {
-        font-size: 1.4vw;
+        font-size: 2.1vw;
     }
 
     .buy-now-btn {
         padding: 12px 30px;
-        font-size: 1.2vw;
+        font-size: 2vw;
     }
 
     .swiper-button-next, .swiper-button-prev {
@@ -977,17 +1030,60 @@ body {
     .brand-logo.optimum-nutrition {
         max-height:  80px;
     }
+
+    .header-section .row {
+        flex-wrap: nowrap; 
+    }
+
+    .header-section {
+        padding: 5px 0; 
+    }
+
+    .hero-section {
+        padding: 5px 0; 
+    }
+
+    .product-carousel {
+        min-height: 50vh;
+        padding: 2px 0 !important; 
+        margin-top: 0; 
+    }
+
+    .swiper-slide {
+        height: 20vh !important; 
+        padding: 10px 0; 
+    }
+
+    .background-catalog {
+        top: 3vh;
+        font-size: 10vw;
+        width: 110%; 
+        left: -5%;
+    }
+
+    .catalog-section {
+        min-height: 40vh; 
+        overflow: visible;
+    }
+
+    .card-title {
+        font-size: 2.5vw;
+    }
+
+    .card-description {
+        font-size: 0.8rem;
+    }
 }
 
 @media (max-width: 576px) {
     .top-option {
         justify-content: flex-end;
-        gap: 10px; /* Уменьшаем расстояние между иконками */
-        margin-right: 10px; /* Уменьшаем отступ справа */
+        gap: 10px; 
+        margin-right: 10px; 
     }
 
     .to-cart a, .to-account a {
-        font-size: 20px; /* Уменьшаем размер иконок для компактности */
+        font-size: 20px; 
     }
 
     .site-name {
@@ -998,39 +1094,46 @@ body {
     .header-section .col-auto:first-child {
         display: flex;
         align-items: center;
-        justify-content: flex-start; /* Логотип и текст выравниваются слева */
+        justify-content: flex-start; 
     }
 
     .logo img {
-        max-height: 40px; /* Уменьшаем размер логотипа на мобильных */
+        max-height: 40px; 
     }
 
     .header-section .row {
-        flex-wrap: nowrap; /* Предотвращаем перенос на новую строку */
+        flex-wrap: nowrap; 
     }
 
     .header-section {
-        padding: 5px 0; /* Уменьшаем отступы шапки */
+        padding: 5px 0; 
     }
 
     .hero-section {
-        padding: 5px 0; /* Уменьшаем с 10px до 5px */
+        padding: 5px 0; 
     }
 
     .product-carousel {
         min-height: 50vh;
-        padding: 2px 0 !important; /* Уменьшаем с 20px до 10px */
-        margin-top: 0; /* Убираем лишний отступ сверху */
+        padding: 2px 0 !important; 
+        margin-top: 0; 
     }
 
     .swiper-slide {
-        height: 20vh !important; /* Уменьшаем высоту слайда с 80vh до 60vh */
-        padding: 10px 0; /* Уменьшаем внутренние отступы */
+        height: 20vh !important; 
+        padding: 10px 0; 
     }
 
     .background-catalog {
         top: 3vh;
         font-size: 10vw;
+        width: 110%; 
+        left: -5%;
+    }
+
+    .catalog-section {
+        min-height: 40vh; 
+        overflow: visible;
     }
 
     .card-title {
@@ -1151,6 +1254,27 @@ body {
     .brand-logo.optimum-nutrition {
         max-height: 70px;
     }
+
+    .catalog-section .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .catalog-section .col-12, 
+    .catalog-section .col, 
+    .catalog-section .col-auto {
+        padding-right: 0 !important; 
+        padding-left: 0 !important;
+    }
+
+    .catalog-section .product-card {
+        padding-right: 15px !important; 
+        padding-left: 15px !important;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%; /* Ограничиваем ширину карточки, чтобы отступы были видны */
+        box-sizing: border-box;
+    }
 }
 
 /* ====================== */
@@ -1228,7 +1352,6 @@ body {
     color: #CCCCCC;
 }
 
-/* Адаптивность */
 @media (max-width: 991px) {
     .background-contacts {
         top: 5vh;
