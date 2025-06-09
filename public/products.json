@@ -39,36 +39,5 @@
            "extended-description": "Kevin Levrone Anabolic Amino обеспечивает быстрое восстановление мышц после тренировок.",
            "price": "13.900 ₸",
            "image": "./img/products/anabolic.png"
-       },
-       {
-           "id": "prod5",
-           "category": "creatine",
-           "brand": "BSN",
-           "title": "BSN Creatine 300г",
-           "description": "Креатин для силы и выносливости.",
-           "extended-description": "BSN Creatine — компактный и эффективный креатин для повышения производительности.",
-           "price": "15.000 ₸",
-           "image": "./img/products/creatine.png"
-       },
-       {
-           "id": "prod6",
-           "category": "protein",
-           "brand": "Dymatize",
-           "title": "ISO 100 Hydrolyzed Protein 900г",
-           "description": "Гидролизованный протеин для восстановления.",
-           "extended-description": "Dymatize ISO 100 — чистый гидролизат сывороточного протеина для быстрого усвоения.",
-           "price": "25.000 ₸",
-           "image": "./img/products/anabolic.png"
-       }
-       ,
-       {
-           "id": "prod7",
-           "category": "protein",
-           "brand": "Dymatize",
-           "title": "ISO 100 Hydrolyzed Protein 900г",
-           "description": "Гидролизованный протеин для восстановления.",
-           "extended-description": "Dymatize ISO 100 — чистый гидролизат сывороточного протеина для быстрого усвоения.",
-           "price": "25.000 ₸",
-           "image": "./img/products/anabolic.png"
        }
 ]
