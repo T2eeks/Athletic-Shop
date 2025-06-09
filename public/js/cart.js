@@ -58,11 +58,12 @@ $(document).ready(function() {
         $('#cart-total-price').text(`${totalPrice.toLocaleString()} ₸`);
         $('#checkout-btn').prop('disabled', cart.length === 0);
     }
-е
+
     window.updateCartCount = function() {
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         $('.cart-count').text(totalItems > 0 ? ` (${totalItems})` : '');
     };
+
 
     $('#open-cart').on('click', function(e) {
         e.preventDefault();
@@ -70,6 +71,7 @@ $(document).ready(function() {
         $('#cart-overlay').addClass('open');
         updateCartDisplay();
     });
+
 
     $('#close-cart, #cart-overlay').on('click', function() {
         $('#cart-sidebar').removeClass('open');
