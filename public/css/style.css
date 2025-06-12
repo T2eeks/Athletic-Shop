@@ -1516,3 +1516,130 @@ body {
         display: none !important;
     }
 }
+
+/* ====================== */
+/* === СЕКЦИЯ О НАС === */
+/* ====================== */
+.about-section {
+    padding: 200px 0;
+    background-color: #490303;
+    position: relative;
+    opacity: 0;
+    animation: fadeInSection 1s ease 1.2s forwards;
+    text-align: center;
+    overflow: visible;
+}
+
+.background-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.background-about {
+    position: absolute;
+    width: 100%;
+    font-family: 'Oswald', sans-serif;
+    font-size: 15vw;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    opacity: 0.5;
+    z-index: -1;
+    pointer-events: none;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1;
+    top: 0vh; 
+    transform: skewX(-12deg); 
+}
+
+.about-section .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3rem;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1; 
+}
+
+.about-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: #FFFFFF;
+}
+
+.about-section p {
+    font-family: 'Oswald', sans-serif; 
+    font-size: 1.5rem;
+    color: #CCCCCC;
+    max-width: 700px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+    padding: 0 20px;
+    opacity: 0.9;
+    z-index: 1; 
+}
+
+.about-section::after {
+    display: none;
+}
+
+.products-section::before {
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .about-section {
+        padding: 100px 0; 
+        min-height: 200px; 
+    }
+
+    .background-about {
+        font-size: 15vw; 
+        top: 6vh; 
+    }
+
+    .about-section .section-title {
+        font-size: 2rem; 
+    }
+
+    .about-section .section-title::after {
+        height: 2px;
+    }
+
+    .about-section p {
+        font-size: 1rem; 
+        max-width: 90%;
+    }
+}
+
+.product-carousel::after, .about-section::before {
+    display: none;
+}
+
+.hero-section::after, .products-section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    z-index: 1;
+}
+
+.hero-section::after {
+    bottom: -100px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(73, 3, 3, 1));
+}
+
+.products-section::before {
+    top: -200px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(73, 3, 3, 1));
+}
